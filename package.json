@@ -1,0 +1,65 @@
+{
+  "name": "mern-social-server",
+  "packageManager": "yarn@1.22.19",
+  "version": "2.0.0",
+  "description": "MERN Stack Social Media Application",
+  "author": "Indranil Halder <indranilhalder.dev@gmail.com>",
+  "license": "MIT",
+  "main": "server/server.js",
+  "keywords": [
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "material-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/indranildeveloper/mern-social.git"
+  },
+  "homepage": "https://github.com/indranildeveloper/mern-social",
+  "scripts": {
+    "start": "node -r esm server/server",
+    "server": "nodemon -r esm server/server",
+    "client-install": "yarn --cwd client",
+    "client": "yarn --cwd client dev",
+    "dev": "concurrently \"yarn server\" \"yarn client\"",
+    "lint-server": "eslint ./server --ext .js",
+    "lint-client": "eslint ./client/src --ext .js,.jsx"
+  },
+  "engines": {
+    "node": "18.12.1",
+    "npm": "8.19.2"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "esm": "^3.2.25",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "express-jwt": "^7.7.7",
+    "helmet": "^6.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.5"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-react-redux": "^4.0.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.1"
+  }
+}
