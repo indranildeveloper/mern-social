@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
 import helmet from "helmet";
+import path from "path";
 
 import { authRoutes, userRoutes } from "./routes";
 import { errorMiddleware } from "./middlewares";
@@ -12,6 +13,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "uploads")));
 app.use(cookieParser());
 app.use(compression());
 app.use(cors());

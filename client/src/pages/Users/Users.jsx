@@ -17,7 +17,7 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import Person from "@mui/icons-material/Person";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { getUsers } from "../../fearutes/user/userSlice";
+import { getUsers } from "../../features/user/userSlice";
 import { styles } from "./styles";
 
 const Users = () => {
@@ -80,9 +80,17 @@ const Users = () => {
                 <ListItemButton>
                   <ListItemIcon>
                     <ListItemAvatar>
-                      <Avatar>
-                        <Person />
-                      </Avatar>
+                      {user.photo ? (
+                        <Avatar
+                          sx={styles.avatar}
+                          src={user.photo}
+                          alt={user.name}
+                        />
+                      ) : (
+                        <Avatar sx={styles.avatar}>
+                          <Person />
+                        </Avatar>
+                      )}
                     </ListItemAvatar>
                   </ListItemIcon>
                   <ListItemText primary={user.name} />

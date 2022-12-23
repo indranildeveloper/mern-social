@@ -20,6 +20,12 @@ const hasAuthorization = asyncHandler(async (req, res, next) => {
       req.profile = await User.findById({ _id: decoded.userId }).select(
         "-password"
       );
+
+      if (req.params.userId !== decoded.userId) {
+        res.status(401);
+        throw new Error("Not Authorized!");
+      }
+
       next();
     } catch (error) {
       console.log(error);

@@ -4,6 +4,8 @@ import userService from "./userService";
 const initialState = {
   users: [],
   user: null,
+  photoUrl: "",
+  defaultPhoto: "",
   isError: false,
   isSuccess: false,
   isUpdated: false,
@@ -51,14 +53,52 @@ export const getUser = createAsyncThunk(
   }
 );
 
+// Get profile photo
+export const getProfilePhoto = createAsyncThunk(
+  "user/getProfilePhoto",
+  async (userId, thunkAPI) => {
+    try {
+      return await userService.getProfilePhoto(userId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get default photo
+export const getDefaultPhoto = createAsyncThunk(
+  "user/getDefaultPhoto",
+  async (_, thunkAPI) => {
+    try {
+      return await userService.getDefaultPhoto();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Update user data
 export const updateUser = createAsyncThunk(
   "user/updateUser",
-  async (user, thunkAPI) => {
+  // eslint-disable-next-line consistent-return
+  async (userData, thunkAPI) => {
     try {
-      const { token } = thunkAPI.getState().auth.user;
-      const userId = thunkAPI.getState().auth.user._id;
-      return await userService.updateUser(userId, user, token);
+      const { _id, token } = thunkAPI.getState().auth.user;
+      return await userService.updateUser(_id, userData, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -138,8 +178,43 @@ export const userSlice = createSlice({
         state.user = null;
         state.message = action.payload;
       })
+      .addCase(getProfilePhoto.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProfilePhoto.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.photoUrl = action.payload;
+        state.message = "";
+      })
+      .addCase(getProfilePhoto.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.photoUrl = null;
+        state.message = action.payload;
+      })
+      .addCase(getDefaultPhoto.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getDefaultPhoto.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.defaultPhoto = action.payload;
+        state.message = "";
+      })
+      .addCase(getDefaultPhoto.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.defaultPhoto = null;
+        state.message = action.payload;
+      })
       .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
+        state.isUpdated = false;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;

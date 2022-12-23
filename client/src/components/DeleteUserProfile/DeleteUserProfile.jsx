@@ -8,8 +8,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { deleteUser } from "../../fearutes/user/userSlice";
-import { logout, reset } from "../../fearutes/auth/authSlice";
+import { deleteUser } from "../../features/user/userSlice";
+import { logout, reset } from "../../features/auth/authSlice";
 
 const DeleteUserProfile = () => {
   const dispatch = useDispatch();

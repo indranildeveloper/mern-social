@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { logout, reset } from "../../fearutes/auth/authSlice";
+import { logout, reset } from "../../features/auth/authSlice";
 import { styles } from "./styles";
 
 const Navbar = () => {

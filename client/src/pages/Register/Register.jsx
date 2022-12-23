@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Loading from "../../components/Loading/Loading";
 import registerImg from "../../assets/img/register.svg";
-import { register, reset } from "../../fearutes/auth/authSlice";
+import { register, reset } from "../../features/auth/authSlice";
 import { styles } from "./styles";
 
 const Register = () => {
@@ -47,7 +47,6 @@ const Register = () => {
     e.preventDefault();
 
     if (!name || !email || !password || !confirmPassword) {
-      console.log("Please fill up all the fields");
       setValues({
         ...values,
         error: "Please fill up all the fields!",

@@ -7,7 +7,7 @@ import { styles } from "./styles";
 const Home = () => {
   return (
     <Box sx={styles.container}>
-      <Typography variant="h4">Welcome to MERN Skeleton</Typography>
+      <Typography variant="h4">Welcome to MERN Social</Typography>
       <Divider variant="middle" sx={styles.divider} />
       <Box component="div" sx={styles.imgContainer}>
         <Box component="img" src={homeImg} />

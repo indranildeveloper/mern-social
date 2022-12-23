@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Loading from "../../components/Loading/Loading";
 import loginImg from "../../assets/img/login.svg";
-import { login, reset } from "../../fearutes/auth/authSlice";
+import { login, reset } from "../../features/auth/authSlice";
 import { styles } from "./styles";
 
 const Login = () => {

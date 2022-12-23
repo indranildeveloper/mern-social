@@ -11,7 +11,7 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import Person from "@mui/icons-material/Person";
 import { Loading, DeleteUserProfile } from "../../components";
-import { getUser } from "../../fearutes/user/userSlice";
+import { getUser, getProfilePhoto } from "../../features/user/userSlice";
 import { styles } from "./styles";
 
 const Profile = () => {
@@ -25,6 +25,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getUser(userId));
+    dispatch(getProfilePhoto(userId));
     if (isError) {
       setOpen(true);
     }
@@ -72,12 +73,17 @@ const Profile = () => {
             alignItems="center"
             gap={4}
           >
-            <Avatar>
-              <Person />
-            </Avatar>
+            {user.photo ? (
+              <Avatar sx={styles.avatar} src={user.photo} alt={user.name} />
+            ) : (
+              <Avatar sx={styles.avatar}>
+                <Person />
+              </Avatar>
+            )}
             <Box>
               <Typography variant="h6">{user.name}</Typography>
               <Typography variant="body1">{user.email}</Typography>
+              {/* @TODO: Add the about text */}
               <Typography variant="body1">Joined: {user.createdAt}</Typography>
             </Box>
           </Stack>
